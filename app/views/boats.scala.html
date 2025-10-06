@@ -1,0 +1,21 @@
+@(boats: java.util.List[Boat])(implicit request: Http.Request)
+
+@main("Bootsliste") {
+    <h2>Boote</h2>
+
+    @if(boats == null) {
+        <p>There are currently no boats available</p>
+    } else {
+        @for(boat <- boats) {
+            <ul>
+                <li>
+                    <p>@boat.kfz - @boat.name</p>
+
+                    <button type="button" onclick="bestaetigeLoeschen(@boat.id, event)" class="fa fa-trash" style="color: red"></button>
+                </li>
+            </ul>
+        }
+    }
+
+    <button onclick="window.location.href='@routes.BoatController.newBoat()'" class="fa fa-plus"></button>
+}
