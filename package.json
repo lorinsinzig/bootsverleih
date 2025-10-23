@@ -1,0 +1,44 @@
+{
+  "name": "bootsverleih",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "webpack --mode development --config app/webpack/webpack.dev.js",
+    "watch": "webpack --mode development --watch --config app/webpack/webpack.dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorinsinzig/bootsverleih.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lorinsinzig/bootsverleih/issues"
+  },
+  "homepage": "https://github.com/lorinsinzig/bootsverleih#readme",
+  "description": "",
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@types/node": "^24.9.1",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.2",
+    "mini-css-extract-plugin": "^2.9.4",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.93.2",
+    "sass-loader": "^16.0.5",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-merge": "^6.0.1"
+  }
+}

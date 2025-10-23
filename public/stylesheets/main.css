@@ -1,0 +1,23 @@
+#calendar {
+    margin: 0;
+    width: 200px;
+    height: fit-content;
+    border: solid 1px black;
+    background-color: azure;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.day {
+    padding: 5px;
+    text-align: center;
+    height: 20px;
+    width: 20px;
+}
+
+.day.today {
+    background-color: red;
+    color: white;
+}

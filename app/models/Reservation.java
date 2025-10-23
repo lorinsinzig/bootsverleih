@@ -2,10 +2,13 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.ebean.Model;
+import models.finders.BoatFinder;
+import models.finders.ReservationFinder;
 import play.data.format.Formats;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reservation")
@@ -28,13 +31,17 @@ public class Reservation extends Model {
     @Column(name = "date")
     public String date;
 
-    @Formats.DateTime(pattern = "HH:mm")
-    @Column(name = "time_start")
-    public String timeStart;
+    @Transient
+    public String timeStartString;
 
-    @Formats.DateTime(pattern = "HH:mm")
+    @Column(name = "time_start")
+    public LocalTime timeStart;
+
+    @Transient
+    public String timeEndString;
+
     @Column(name = "time_end")
-    public String timeEnd;
+    public LocalTime timeEnd;
 
     @Transient
     public String boatId;
@@ -42,6 +49,8 @@ public class Reservation extends Model {
     @ManyToOne
     @JoinColumn(name = "boot_id", referencedColumnName = "id")
     public Boat boat;
+
+    public static final ReservationFinder FINDER = new ReservationFinder();
 
     public String getName() {
         return name;
@@ -75,19 +84,19 @@ public class Reservation extends Model {
         this.date = date;
     }
 
-    public String getTimeStart() {
+    public LocalTime getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(String timeStart) {
+    public void setTimeStart(LocalTime timeStart) {
         this.timeStart = timeStart;
     }
 
-    public String getTimeEnd() {
+    public LocalTime getTimeEnd() {
         return timeEnd;
     }
 
-    public void setTimeEnd(String timeEnd) {
+    public void setTimeEnd(LocalTime timeEnd) {
         this.timeEnd = timeEnd;
     }
 
@@ -105,5 +114,21 @@ public class Reservation extends Model {
 
     public void setBoat(Boat boat) {
         this.boat = boat;
+    }
+
+    public String getTimeStartString() {
+        return timeStartString;
+    }
+
+    public void setTimeStartString(String timeStartString) {
+        this.timeStartString = timeStartString;
+    }
+
+    public String getTimeEndString() {
+        return timeEndString;
+    }
+
+    public void setTimeEndString(String timeEndString) {
+        this.timeEndString = timeEndString;
     }
 }

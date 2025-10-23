@@ -25,7 +25,7 @@ public class BoatController extends Controller {
     Boat data;
 
     public Result boat(Http.Request request) {
-        List<Boat> boats = Boat.FINDER.all();
+        List<Boat> boats = Boat.FINDER.getAllBoats();
 
         return ok(views.html.boats.render(boats, request));
     }

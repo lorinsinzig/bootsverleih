@@ -14,3 +14,7 @@ libraryDependencies ++= Seq(
   jdbc,
   "mysql" % "mysql-connector-java" % "8.0.33"
 )
+
+WebpackKeys.webpackConfigs := Seq(
+  baseDirectory.value / "app" / "webpack" / "webpack.dev.js",
+)

@@ -10,4 +10,10 @@ public class BoatFinder extends Finder<Integer, Boat> {
     public BoatFinder() {
         super(Boat.class);
     }
+
+    public List<Boat> getAllBoats() {
+        return query()
+                .orderBy("kfz desc")
+                .findList();
+    }
 }

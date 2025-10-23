@@ -24,12 +24,12 @@
 
         @inputText(reservationForm("date"), Symbol("_label") -> "Datum", Symbol("type") -> "date", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("timeStart"), Symbol("_label") -> "Zeit von", Symbol("type") -> "time", Symbol("_showConstraints") -> false)
+        @inputText(reservationForm("timeStartString"), Symbol("_label") -> "Zeit von", Symbol("type") -> "time", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("timeEnd"),   Symbol("_label") -> "Zeit bis",  Symbol("type") -> "time", Symbol("_showConstraints") -> false)
-
-
+        @inputText(reservationForm("timeEndString"),   Symbol("_label") -> "Zeit bis",  Symbol("type") -> "time", Symbol("_showConstraints") -> false)
 
         <input type="submit" value="Confirm">
     }
+
+    <div id="calendar"></div>
 }

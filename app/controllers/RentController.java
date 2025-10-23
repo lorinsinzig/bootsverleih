@@ -10,6 +10,8 @@ import play.libs.Scala;
 import play.mvc.Http;
 import play.mvc.Result;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,9 +23,10 @@ public class RentController {
     Reservation data;
     private MessagesApi messagesApi;
     private FormFactory formFactory;
+    Form<Reservation> reservationForm;
 
     public Result rent(Http.Request request) {
-        Form<Reservation> reservationForm = formFactory.form(Reservation.class);
+        reservationForm = formFactory.form(Reservation.class);
         List<Boat> boats = getBoats();
 
         return ok(views.html.rent.render(reservationForm, Scala.asScala(boats), request, messagesApi.preferred(request)));
@@ -36,9 +39,7 @@ public class RentController {
     }
 
     private List<Boat> getBoats() {
-        List<Boat> boats = Boat.FINDER.query().orderBy("kfz desc").findList();
-
-        return boats;
+        return Boat.FINDER.getAllBoats();
     }
 
     public Result create(Http.Request request) {
@@ -54,6 +55,20 @@ public class RentController {
         Integer boatId = Integer.parseInt(data.boatId);
         data.setBoat(Boat.FINDER.byId(boatId));
 
+        data.setTimeStart(LocalTime.parse(data.timeStartString));
+        data.setTimeEnd(LocalTime.parse(data.timeEndString));
+
+        // Check for existing reservation in 15-minute range
+        List<Reservation> concurrentReservations = Reservation.FINDER.getConcurrentReservations(data.getBoat(), data.date, data.timeStart, data.timeEnd);
+
+        if (!concurrentReservations.isEmpty()) {
+            List<Boat> boats = getBoats();
+
+            System.out.println("Reservation in selbem Zeitraum bereits bestehend.");
+
+            return ok(views.html.rent.render(reservationForm, Scala.asScala(boats), request, messagesApi.preferred(request)));
+        }
+
         Reservation reservation = new Reservation();
 
         reservation.name = data.name;
@@ -65,6 +80,6 @@ public class RentController {
         reservation.setBoat(data.boat);
         reservation.save();
 
-        return redirect(routes.RentController.rent());
+        return redirect(routes.HomeController.index());
     }
 }

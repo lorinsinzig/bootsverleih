@@ -66,8 +66,8 @@ create table reservation (
   email                         varchar(255),
   tel_nr                        integer,
   date                          varchar(255),
-  time_start                    varchar(255),
-  time_end                      varchar(255),
+  time_start                    time,
+  time_end                      time,
   boot_id                       integer,
   constraint pk_reservation primary key (id)
 );
