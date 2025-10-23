@@ -1,0 +1,31 @@
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/stylesheets/main.scss ***!
+  \********************************************************************************************************************/
+#calendar {
+  margin: 0;
+  width: 200px;
+  height: 35vh;
+  max-height: 35vh;
+  border: solid 1px black;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  position: relative;
+}
+#calendar .section {
+  height: 15px;
+  color: #839990;
+  border-bottom: solid 1px black;
+}
+#calendar .section.reserved {
+  background-color: red;
+  color: white;
+  opacity: 60%;
+}
+#calendar .section.preview {
+  box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.5);
+  color: white;
+  opacity: 60%;
+}

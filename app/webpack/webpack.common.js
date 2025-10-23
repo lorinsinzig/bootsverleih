@@ -3,12 +3,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        'main': './app/typescripts/Loader.ts'
+        'main': './app/typescripts/Loader.ts',
+        'styles': './app/stylesheets/main.scss'
     },
     output: {
-        path: path.resolve('./public/javascripts'),
-        publicPath: '/assets/javascripts',
-        filename: '[name].js'
+        path: path.resolve(__dirname, '../../public'),
+        publicPath: '/assets/',
+        filename: 'javascripts/[name].js'
     },
     resolve: {
         extensions: ['.ts', '.js', '.scss']
@@ -19,10 +20,7 @@ module.exports = {
                 test: /\.(sa|sc|c)ss$/,
                 exclude: /node_modules/,
                 use: [
-                    'raw-loader',
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                    },
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
                 ]
@@ -41,9 +39,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: "[name].css"
-            // filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-            // chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+            filename: 'stylesheets/[name].css'
         })
     ],
 };
