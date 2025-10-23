@@ -6,6 +6,7 @@ import play.api.i18n.MessagesApi;
 import play.data.Form;
 import play.data.FormFactory;
 
+import play.libs.Json;
 import play.libs.Scala;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -40,6 +41,12 @@ public class RentController {
 
     private List<Boat> getBoats() {
         return Boat.FINDER.getAllBoats();
+    }
+
+    public Result getReservations(int id, String date) {
+        List<Reservation> reservations = Reservation.FINDER.getSameDayReservations(Boat.FINDER.byId(id), date);
+
+        return ok(Json.toJson(reservations));
     }
 
     public Result create(Http.Request request) {

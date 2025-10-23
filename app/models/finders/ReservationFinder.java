@@ -25,4 +25,12 @@ public class ReservationFinder extends Finder<Integer, Reservation> {
                 .gt("time_end", windowStart)
                 .findList();
     }
+
+    public List<Reservation> getSameDayReservations(Boat boat, String date) {
+        return query()
+                .where()
+                .eq("boot_id", boat.id)
+                .eq("date", date)
+                .findList();
+    }
 }
