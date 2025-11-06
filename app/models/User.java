@@ -1,12 +1,13 @@
 package models;
 
-import io.ebean.Finder;
 import io.ebean.Model;
+import models.finders.UserFinder;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class UserData extends Model {
+public class User extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -17,7 +18,10 @@ public class UserData extends Model {
     @Column(name = "password")
     public String password;
 
-    public static final Finder<Long, UserData> find = new Finder<>(UserData.class);
+    @Column(name = "admin")
+    public String admin;
+
+    public static final UserFinder FINDER = new UserFinder();
 
     public String getUsername() {
         return username;
@@ -33,5 +37,13 @@ public class UserData extends Model {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAdmin() {
+        return this.admin;
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 }

@@ -8,15 +8,11 @@ import play.db.Database;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.mvc.Security;
+import services.PermissionService;
 
 import javax.inject.Inject;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 public class BoatController extends Controller {
 
@@ -24,6 +20,7 @@ public class BoatController extends Controller {
     private FormFactory formFactory;
     Boat data;
 
+    @Security.Authenticated(PermissionService.class)
     public Result boat(Http.Request request) {
         List<Boat> boats = Boat.FINDER.getAllBoats();
 

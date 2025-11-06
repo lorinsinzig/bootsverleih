@@ -4,6 +4,7 @@ import io.ebean.Finder;
 import models.Boat;
 import models.Reservation;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -31,6 +32,15 @@ public class ReservationFinder extends Finder<Integer, Reservation> {
                 .where()
                 .eq("boot_id", boat.id)
                 .eq("date", date)
+                .findList();
+    }
+
+    public List<Reservation> getAllAheadReservations(LocalDate date) {
+        return query()
+                .fetch("boat")
+                .where()
+                .gt("date", date)
+                .orderBy("time_start")
                 .findList();
     }
 }

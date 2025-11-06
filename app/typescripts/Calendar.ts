@@ -8,11 +8,6 @@ export class Calendar {
     constructor() {
         this.calendarObject = document.getElementById("calendar");
 
-        if (!this.calendarObject) {
-            console.error("Calendar element not found.");
-            return;
-        }
-
         this.boatSelect = document.getElementById("boatId") as HTMLSelectElement;
         this.dateInput = document.getElementById("date") as HTMLInputElement;
         this.timeStartInput = document.getElementById("timeStartString") as HTMLInputElement;
@@ -23,8 +18,10 @@ export class Calendar {
             timeSection.className = "section"
             timeSection.id = i.toString();
 
+            // Calculate current time based on total minutes passed
             const hours = Math.floor(i / 60);
             const minutes = i % 60;
+
             const formattedHours = String(hours).padStart(2, '0');
             const formattedMinutes = String(minutes).padStart(2, '0');
             timeSection.innerHTML = `${formattedHours}:${formattedMinutes}`;
@@ -49,7 +46,6 @@ export class Calendar {
             this.dateInput.addEventListener("change", reservationUpdateHandler);
         }
 
-        // Add listeners for the time inputs
         if (this.timeStartInput && this.timeEndInput) {
             this.timeStartInput.addEventListener("change", previewUpdateHandler);
             this.timeEndInput.addEventListener("change", previewUpdateHandler);
@@ -70,9 +66,6 @@ export class Calendar {
 
         try {
             const response = await fetch(`/reservation/${boatId}/${date}`);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch: ${response.statusText}`);
-            }
 
             interface Reservation {
                 timeStart: string;
@@ -91,6 +84,7 @@ export class Calendar {
                     const sectionDiv = document.getElementById(i.toString());
                     if (sectionDiv) {
                         sectionDiv.classList.add('reserved');
+                        console.log()
                     }
                 }
             });
@@ -103,10 +97,6 @@ export class Calendar {
         this.calendarObject.querySelectorAll('.section.preview').forEach(sec => {
             sec.classList.remove('preview');
         });
-
-        if (!timeStart || !timeEnd) {
-            return;
-        }
 
         try {
             const startMinutes = this.timeToMinutes(timeStart);

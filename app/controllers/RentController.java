@@ -10,6 +10,8 @@ import play.libs.Json;
 import play.libs.Scala;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.mvc.Security;
+import services.LoginService;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,6 +28,7 @@ public class RentController {
     private FormFactory formFactory;
     Form<Reservation> reservationForm;
 
+    @Security.Authenticated(LoginService.class)
     public Result rent(Http.Request request) {
         reservationForm = formFactory.form(Reservation.class);
         List<Boat> boats = getBoats();

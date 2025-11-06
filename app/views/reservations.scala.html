@@ -1,0 +1,19 @@
+@(reservations: java.util.List[Reservation])(implicit request: Http.Request)
+
+@main("Boot mieten") {
+    <h2>Reservationen</h2>
+
+    @if(reservations == null) {
+        <p>There are currently no boats available</p>
+    } else {
+        @for(reservation <- reservations) {
+            <ul>
+                <li>
+                    <p>@reservation.name</p>
+                    <p>@reservation.timeStart - @reservation.timeEnd</p>
+                    <p>@reservation.boat.name</p>
+                </li>
+            </ul>
+        }
+    }
+}

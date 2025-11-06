@@ -76,6 +76,7 @@ create table users (
   id                            bigint auto_increment not null,
   username                      varchar(255),
   password                      varchar(255),
+  admin                         varchar(255),
   constraint pk_users primary key (id)
 );
 

@@ -5,10 +5,13 @@
 # An example controller showing a sample home page
 GET      /                          controllers.HomeController.index(request: play.mvc.Http.Request)
 
+GET      /login                     controllers.HomeController.login(request: play.mvc.Http.Request)
+
 GET     /rent                      controllers.RentController.rent(request: play.mvc.Http.Request)
 GET     /contact                    controllers.ContactController.contact(request: play.mvc.Http.Request)
 GET     /boats        controllers.BoatController.boat(request: play.mvc.Http.Request)
 GET     /boats/new        controllers.BoatController.newBoat(request: play.mvc.Http.Request)
+GET     /reservations               controllers.ReservationController.reservations(request: play.mvc.Http.Request)
 
 GET     /javascriptRoutes   controllers.JavaScriptRouter.javascriptRoutes(request: play.mvc.Http.Request)
 
@@ -18,6 +21,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 POST     /create                    controllers.RentController.create(request: play.mvc.Http.Request)
 POST     /boat/create                   controllers.BoatController.createBoat(request: play.mvc.Http.Request)
+POST     /authenticate                  controllers.HomeController.authenticate(request: play.mvc.Http.Request)
 
 DELETE      /boat/delete/:id                    controllers.BoatController.deleteBoat(id: Int)
 GET         /reservation/:id/:date                  controllers.RentController.getReservations(id: Int, date: String)
