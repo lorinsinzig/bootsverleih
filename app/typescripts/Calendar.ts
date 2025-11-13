@@ -18,7 +18,6 @@ export class Calendar {
             timeSection.className = "section"
             timeSection.id = i.toString();
 
-            // Calculate current time based on total minutes passed
             const hours = Math.floor(i / 60);
             const minutes = i % 60;
 
@@ -79,12 +78,12 @@ export class Calendar {
                 const endMinutes = this.timeToMinutes(res.timeEnd);
 
                 const gridStart = (Math.floor(startMinutes / 15) * 15) - 15;
+                const gridEnd = (Math.floor(endMinutes / 15) * 15) + 15;
 
-                for (let i = gridStart; i < endMinutes + 15; i += 15) {
+                for (let i = gridStart; i <= gridEnd; i += 15) {
                     const sectionDiv = document.getElementById(i.toString());
                     if (sectionDiv) {
                         sectionDiv.classList.add('reserved');
-                        console.log()
                     }
                 }
             });

@@ -20,13 +20,20 @@ public class HomeController extends Controller {
     }
 
     public Result index(Http.Request request) {
-        return ok(views.html.index.render(request));
+        String message = request.flash().get("error").orElse("");
+
+        return ok(views.html.index.render(message, request, messagesApi.preferred(request)));
     }
 
     public Result login(Http.Request request) {
         Form<User> userForm = formFactory.form(User.class);
 
         return ok(views.html.login.render(userForm, request, messagesApi.preferred(request)));
+    }
+
+    public Result logout(Http.Request request) {
+        return redirect(routes.HomeController.index())
+                .withNewSession();
     }
 
     public Result authenticate(Http.Request request) {
