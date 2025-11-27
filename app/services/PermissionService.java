@@ -24,7 +24,8 @@ public class PermissionService extends Security.Authenticator {
     public Result onUnauthorized(Http.Request request) {
         if (request.session().getOptional("id").isPresent() && request.session().getOptional("isAdmin").isPresent()) {
             return redirect(controllers.routes.HomeController.index())
-                .flashing("error", "Sie haben keine Berechtigung für diese Aktion");
+                .flashing("error", "Sie haben keine Berechtigung für diese Aktion")
+                .withSession(request.session().adding("originalUrl", request.uri()));
         } else {
             return redirect(controllers.routes.HomeController.login());
         }

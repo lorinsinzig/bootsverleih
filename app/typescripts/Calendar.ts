@@ -102,12 +102,13 @@ export class Calendar {
             const endMinutes = this.timeToMinutes(timeEnd);
 
             const gridStart = Math.floor(startMinutes / 15) * 15;
+            const gridEnd = Math.floor(endMinutes / 15) * 15;
 
             const scrollTargetMinutes = Math.max(0, gridStart - 30);
 
             const targetElement = document.getElementById(scrollTargetMinutes.toString());
 
-            for (let i = gridStart; i < endMinutes; i += 15) {
+            for (let i = gridStart; i < gridEnd; i += 15) {
                 const sectionDiv = document.getElementById(i.toString());
                 if (sectionDiv) {
                     sectionDiv.classList.add('preview');

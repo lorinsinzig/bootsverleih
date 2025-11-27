@@ -1,18 +1,28 @@
 @* /app/views/header.scala.html *@
 
-@(title: String)
+@(title: String)(implicit request: Http.Request)
 
-<header class="main-header">
-    <h3>
+<header class="header">
+    <h3 class="title">
         @title
     </h3>
-    <nav>
+    <nav class="navigation">
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/reservations">Reservationen</a></li>
-            <li><a href="/rent">Reservation erstellen</a></li>
-            <li><a href="/contact">Kontakt</a></li>
-            <li><a href="/boats">Boote verwalten</a></li>
+            <li><a class="link" href="/">Home</a></li>
+            <li><a class="link" href="/reservations">Reservationen</a></li>
+            <li><a class="link" href="/rent">Reservation erstellen</a></li>
+            <li><a class="link" href="/contact">Kontakt</a></li>
+            <li><a class="link" href="/boats">Boote verwalten</a></li>
         </ul>
+
+        @if(request.session().get("id").isDefined) {
+            <button id="logButton" onclick="confirmLogout('@routes.HomeController.logout()')">
+                Logout
+            </button>
+        } else {
+            <button id="logButton" onclick="window.location.href='@routes.HomeController.login()'">
+                Login
+            </button>
+        }
     </nav>
 </header>

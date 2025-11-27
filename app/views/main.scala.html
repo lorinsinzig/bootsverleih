@@ -21,16 +21,6 @@
     <body>
         @views.html.header(title)
 
-        @if(request.session().get("id").isDefined) {
-            <button onclick="confirmLogout('@routes.HomeController.logout()')">
-                Logout
-            </button>
-        } else {
-            <button onclick="window.location.href='@routes.HomeController.login()'">
-                Login
-            </button>
-        }
-
         @content
 
         <script type="text/javascript" src="@routes.JavaScriptRouter.javascriptRoutes()"></script>

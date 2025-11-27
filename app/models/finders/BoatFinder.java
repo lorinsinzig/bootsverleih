@@ -13,7 +13,7 @@ public class BoatFinder extends Finder<Integer, Boat> {
 
     public List<Boat> getAllBoats() {
         return query()
-                .orderBy("kfz desc")
+                .orderBy("kfz asc")
                 .findList();
     }
 }

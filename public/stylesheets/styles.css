@@ -1,6 +1,16 @@
-/*!********************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./app/stylesheets/main.scss ***!
-  \********************************************************************************************************************/
+/*!************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js!./app/stylesheets/main.scss ***!
+  \************************************************************************************************************************************************/
+body {
+  background-image: url("/assets/images/bootsverleih.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  color: white;
+}
+
 #calendar {
   margin: 0;
   width: 200px;
@@ -28,4 +38,88 @@
   box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.5);
   color: white;
   opacity: 60%;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  color: white;
+}
+
+.header {
+  background-color: #436065;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.header .navigation {
+  padding-bottom: 1px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.header ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.header ul a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.1s ease-in;
+}
+.header ul a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}
+.header ul a:hover {
+  color: #d1d1d1;
+}
+
+#newboat {
+  text-align: center;
+}
+#newboat #boatForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#newboat #boatForm dd, #newboat #boatForm dt {
+  margin: 0;
+  padding: 0;
+}
+#newboat #boatForm dl {
+  width: 30%;
+  margin-bottom: 0;
+}
+#newboat #boatForm input[type=text] {
+  padding-block: 0;
+  padding-inline: 0;
+  border-width: 0;
+  width: 100%;
+  height: 30px;
+}
+#newboat #boatForm .confirm {
+  margin-top: 16px;
+  width: 30%;
+  height: 30px;
+}
+
+#container {
+  background-color: white;
+  margin: 16px;
+  border-radius: 8px;
+  max-width: fit-content;
+  color: black;
+}
+#container #boatlist {
+  margin: 16px;
+}
+#container #boatlist h2 {
+  margin: 0;
 }
