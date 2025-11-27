@@ -67,7 +67,6 @@ public class RentController {
         data.setTimeStart(LocalTime.parse(data.timeStartString));
         data.setTimeEnd(LocalTime.parse(data.timeEndString));
 
-        // Check for existing reservation in 15-minute range
         List<Reservation> concurrentReservations = Reservation.FINDER.getConcurrentReservations(data.getBoat(), data.date, data.timeStart, data.timeEnd);
 
         if (!concurrentReservations.isEmpty()) {

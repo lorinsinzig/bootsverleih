@@ -5,6 +5,7 @@ import io.ebean.Model;
 import models.finders.BoatFinder;
 import models.finders.ReservationFinder;
 import play.data.format.Formats;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,28 +20,34 @@ public class Reservation extends Model {
     public Integer id;
 
     @Column(name = "name")
+    @Constraints.Required(message = "Name is required")
     public String name;
 
     @Column(name = "email")
+    @Constraints.Required(message = "E-Mail is required")
     public String email;
 
     @Column(name = "tel_nr")
+    @Constraints.Required(message = "TelNr is required")
     public Integer telNr;
 
     @Formats.DateTime(pattern = "yyyy-MM-dd")
     @Column(name = "date")
+    @Constraints.Required(message = "Date is required")
     public String date;
 
     @Transient
     public String timeStartString;
 
     @Column(name = "time_start")
+    @Constraints.Required(message = "Starting time is required")
     public LocalTime timeStart;
 
     @Transient
     public String timeEndString;
 
     @Column(name = "time_end")
+    @Constraints.Required(message = "Ending time is required")
     public LocalTime timeEnd;
 
     @Transient

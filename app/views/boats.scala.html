@@ -1,25 +1,25 @@
 @(boats: java.util.List[Boat])(implicit request: Http.Request)
 
 @main("Bootsliste") {
-    <div id="container">
+    <div id="boatlist-container">
         <div id="boatlist">
             <h2>Boote</h2>
 
             @if(boats == null) {
                 <p>There are currently no boats available</p>
             } else {
-                @for(boat <- boats) {
-                    <ul>
+                <ul>
+                    @for(boat <- boats) {
                         <li>
-                            <p>@boat.kfz - @boat.name</p>
+                            <button id="delete" type="button" onclick="confirmDelete(@boat.id, event)" class="fa fa-trash"></button>
 
-                            <button type="button" onclick="bestaetigeLoeschen(@boat.id, event)" class="fa fa-trash"></button>
+                            <p>@boat.kfz - @boat.name</p>
                         </li>
-                    </ul>
-                }
+                    }
+                </ul>
             }
 
-            <button onclick="window.location.href='@routes.BoatController.newBoat()'" class="fa fa-plus"></button>
+            <button id="add" onclick="window.location.href='@routes.BoatController.newBoat()'" class="fa fa-plus"></button>
         </div>
     </div>
 }

@@ -3,33 +3,37 @@
 @(reservationForm: Form[Reservation], boats: Seq[Boat])(implicit request: Http.Request, messages: play.api.i18n.Messages)
 
 @main("Boot mieten") {
+    <div id="calendar-container">
+        <div class="inputFields">
+            @helper.form(action = routes.RentController.create(), Symbol("id") -> "reservationForm") {
+                @CSRF.formField
 
-    @helper.form(action = routes.RentController.create(), Symbol("id") -> "reservationForm") {
-        @CSRF.formField
+                @inputText(reservationForm("name"), Symbol("_label") -> "Name", Symbol("placeholder") -> "Max Muster", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("name"), Symbol("_label") -> "Name", Symbol("placeholder") -> "Max Muster", Symbol("_showConstraints") -> false)
+                @inputText(reservationForm("email"), Symbol("_label") -> "Mailadresse", Symbol("placeholder") -> "max@muster.xy", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("email"), Symbol("_label") -> "Mailadresse", Symbol("placeholder") -> "max@muster.xy", Symbol("_showConstraints") -> false)
+                @inputText(reservationForm("telNr"), Symbol("_label") -> "Telefonnummer", Symbol("placeholder") -> "012 345 67 89", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("telNr"), Symbol("_label") -> "Telefonnummer", Symbol("placeholder") -> "012 345 67 89", Symbol("_showConstraints") -> false)
+                @select(
+                    field = reservationForm("boatId"),
+                    options = options(boats.map(boat => boat.id.toString -> boat.name).toMap),
+                    Symbol("_label") -> "Boot auswählen",
+                    Symbol("_default") -> "-- Bitte Boot auswählen --",
+                    Symbol("_showConstraints") -> false,
+                    Symbol("required") -> true
+                )
 
-        @select(
-            field = reservationForm("boatId"),
-            options = options(boats.map(boat => boat.id.toString -> boat.name).toMap),
-            Symbol("_label") -> "Boot auswählen",
-            Symbol("_default") -> "-- Bitte Boot auswählen --",
-            Symbol("_showConstraints") -> false,
-            Symbol("required") -> true
-        )
+                @inputText(reservationForm("date"), Symbol("_label") -> "Datum", Symbol("type") -> "date", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("date"), Symbol("_label") -> "Datum", Symbol("type") -> "date", Symbol("_showConstraints") -> false)
+                @inputText(reservationForm("timeStartString"), Symbol("_label") -> "Zeit von", Symbol("type") -> "time", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("timeStartString"), Symbol("_label") -> "Zeit von", Symbol("type") -> "time", Symbol("_showConstraints") -> false)
+                @inputText(reservationForm("timeEndString"),   Symbol("_label") -> "Zeit bis",  Symbol("type") -> "time", Symbol("_showConstraints") -> false)
 
-        @inputText(reservationForm("timeEndString"),   Symbol("_label") -> "Zeit bis",  Symbol("type") -> "time", Symbol("_showConstraints") -> false)
-
-        <input type="submit" value="Confirm">
-    }
-
-    <div id="calendar"></div>
+                <input type="submit" value="Confirm">
+            }
+        </div>
+        <div class="calendar">
+            <span id="calendar"></span>
+        </div>
+    </div>
 }

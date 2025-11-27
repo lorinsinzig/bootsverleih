@@ -2,42 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js!./app/stylesheets/main.scss ***!
   \************************************************************************************************************************************************/
 body {
-  background-image: url("/assets/images/bootsverleih.png");
-  background-size: cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background: url("/assets/images/bootsverleih.png") no-repeat fixed center/cover;
   font-family: "Inter", sans-serif;
   margin: 0;
   color: white;
-}
-
-#calendar {
-  margin: 0;
-  width: 200px;
-  height: 35vh;
-  max-height: 35vh;
-  border: solid 1px black;
-  background-color: azure;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  position: relative;
-}
-#calendar .section {
-  height: 15px;
-  color: #839990;
-  border-bottom: solid 1px black;
-}
-#calendar .section.reserved {
-  background-color: red;
-  color: white;
-  opacity: 60%;
-}
-#calendar .section.preview {
-  box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.5);
-  color: white;
-  opacity: 60%;
 }
 
 .title {
@@ -48,29 +16,25 @@ body {
 
 .header {
   background-color: #436065;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
 }
 .header .navigation {
-  padding-bottom: 1px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px 1px;
 }
 .header ul {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   gap: 25px;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 .header ul a {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   transition: color 0.1s ease-in;
 }
 .header ul a.active {
@@ -79,6 +43,59 @@ body {
 }
 .header ul a:hover {
   color: #d1d1d1;
+}
+
+#calendar-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 65px);
+}
+#calendar-container .inputFields {
+  background-color: white;
+  margin: 16px 8px 16px 16px;
+  border-radius: 8px;
+  color: black;
+  flex: 1;
+}
+#calendar-container .inputFields #reservationForm {
+  padding: 16px;
+}
+#calendar-container .inputFields #reservationForm dd, #calendar-container .inputFields #reservationForm dt, #calendar-container .inputFields #reservationForm dl {
+  margin: 0;
+  padding: 0;
+}
+#calendar-container .calendar {
+  background-color: white;
+  margin: 16px 16px 16px 8px;
+  border-radius: 8px;
+  color: black;
+  flex: 1;
+}
+#calendar-container .calendar #calendar {
+  width: 200px;
+  height: 35vh;
+  border: 1px solid black;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  margin: 0;
+}
+#calendar-container .calendar #calendar .section {
+  height: 15px;
+  color: #839990;
+  border-bottom: 1px solid black;
+}
+#calendar-container .calendar #calendar .section.reserved {
+  background-color: red;
+  color: white;
+  opacity: 0.6;
+}
+#calendar-container .calendar #calendar .section.preview {
+  box-shadow: inset 0 0 0 1000px rgba(30, 144, 255, 0.5);
+  color: white;
+  opacity: 0.6;
 }
 
 #newboat {
@@ -98,28 +115,68 @@ body {
   margin-bottom: 0;
 }
 #newboat #boatForm input[type=text] {
-  padding-block: 0;
-  padding-inline: 0;
-  border-width: 0;
   width: 100%;
   height: 30px;
+  padding: 0;
+  border: 0;
 }
 #newboat #boatForm .confirm {
-  margin-top: 16px;
   width: 30%;
   height: 30px;
+  margin-top: 16px;
 }
 
-#container {
+#boatlist-container {
   background-color: white;
   margin: 16px;
   border-radius: 8px;
-  max-width: fit-content;
   color: black;
 }
-#container #boatlist {
-  margin: 16px;
+#boatlist-container #boatlist {
+  padding: 16px;
 }
-#container #boatlist h2 {
+#boatlist-container #boatlist h2 {
   margin: 0;
+}
+#boatlist-container #boatlist #add {
+  margin-top: 16px;
+}
+#boatlist-container #boatlist ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0;
+  margin: 8px 0 0;
+}
+#boatlist-container #boatlist ul li {
+  flex: 1;
+  min-width: 18vw;
+  height: 20vh;
+  background-color: #9e9e9e;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+#boatlist-container #boatlist ul li button {
+  height: 24px;
+}
+
+.fa-trash {
+  color: red;
+}
+
+@media (max-width: 1150px) {
+  #container #boatlist ul li {
+    min-width: 25vw;
+  }
+}
+@media (max-width: 930px) {
+  #container #boatlist ul li {
+    min-width: 30vw;
+  }
+}
+@media (max-width: 500px) {
+  #container #boatlist ul li {
+    min-width: 100%;
+  }
 }

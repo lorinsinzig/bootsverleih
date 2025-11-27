@@ -1,10 +1,12 @@
 import {Calendar} from "./Calendar";
-import {showAlert, showConfirm, confirmLogout} from "./Popup";
+import {showAlert, showConfirm, confirmLogout, confirmDelete} from "./Popup";
 import {highlightActiveLink} from "./Listener";
 
 (window as any).showAlert = showAlert;
 (window as any).showConfirm = showConfirm;
 (window as any).confirmLogout = confirmLogout;
+(window as any).confirmDelete = confirmDelete;
+
 (window as any).highlightActiveLink = highlightActiveLink;
 
 export class Loader {
